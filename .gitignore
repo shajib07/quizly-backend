@@ -1,0 +1,26 @@
+# Virtual environment
+env/
+venv/
+.venv/
+
+# Secrets
+.env
+
+# Database
+db.sqlite3
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Media / temporary audio downloads
+media/
+*.mp3
+*.m4a
+*.webm
+*.wav
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store

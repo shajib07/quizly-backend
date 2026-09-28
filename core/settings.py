@@ -141,6 +141,9 @@ CORS_ALLOW_CREDENTIALS = True
 # Django REST Framework
 
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'auth_app.authentication.CookieJWTAuthentication',
+    ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],

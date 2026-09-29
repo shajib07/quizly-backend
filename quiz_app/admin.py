@@ -29,4 +29,3 @@ class QuestionAdmin(admin.ModelAdmin):
     list_display = ['question_title', 'quiz', 'answer']
     list_filter = ['quiz']
     search_fields = ['question_title']
-    

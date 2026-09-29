@@ -60,5 +60,3 @@ class Question(models.Model):
             raise ValidationError(
                 {'answer': 'The answer must be one of the options.'}
             )
-
-    

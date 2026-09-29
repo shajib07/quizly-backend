@@ -88,4 +88,3 @@ class CookieTokenRefreshView(APIView):
         response = Response({'detail': 'Token refreshed'})
         set_access_cookie(response, access_token)
         return response
-    

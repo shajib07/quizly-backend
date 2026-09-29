@@ -45,4 +45,3 @@ def blacklist_refresh_token(raw_refresh_token):
         RefreshToken(raw_refresh_token).blacklist()
     except TokenError:
         pass
-    

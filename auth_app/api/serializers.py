@@ -35,4 +35,3 @@ class RegistrationSerializer(serializers.ModelSerializer):
         """Create the user with a hashed password."""
         validated_data.pop('confirmed_password')
         return User.objects.create_user(**validated_data)
-    

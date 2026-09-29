@@ -10,6 +10,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from auth_app.utils import (
     blacklist_refresh_token,
     delete_auth_cookies,
+    get_login_data,
     get_new_access_token,
     set_access_cookie,
     set_auth_cookies,
@@ -51,8 +52,7 @@ class LoginView(APIView):
                 {'detail': 'Invalid username or password.'},
                 status=status.HTTP_401_UNAUTHORIZED,
             )
-        user_data = {'id': user.id, 'username': user.username, 'email': user.email}
-        response = Response({'detail': 'Login successfully!', 'user': user_data})
+        response = Response(get_login_data(user))
         set_auth_cookies(response, RefreshToken.for_user(user))
         return response
 
@@ -79,7 +79,8 @@ class CookieTokenRefreshView(APIView):
 
     def post(self, request):
         """Set a new access token cookie if the refresh token is valid."""
-        access_token = get_new_access_token(request.COOKIES.get('refresh_token'))
+        raw_refresh_token = request.COOKIES.get('refresh_token')
+        access_token = get_new_access_token(raw_refresh_token)
         if access_token is None:
             return Response(
                 {'detail': 'Refresh token invalid or missing.'},

@@ -1,4 +1,4 @@
-"""Helper functions for handling JWT tokens stored in HTTP-only cookies."""
+"""Helper functions for the authentication endpoints and JWT cookies."""
 
 from django.conf import settings
 from rest_framework_simplejwt.exceptions import TokenError
@@ -12,13 +12,17 @@ def get_cookie_settings():
 
 def set_access_cookie(response, access_token):
     """Attach the access token to the response as an HTTP-only cookie."""
-    response.set_cookie('access_token', str(access_token), **get_cookie_settings())
+    response.set_cookie(
+        'access_token', str(access_token), **get_cookie_settings()
+    )
 
 
 def set_auth_cookies(response, refresh_token):
     """Attach the access and the refresh token as HTTP-only cookies."""
     set_access_cookie(response, refresh_token.access_token)
-    response.set_cookie('refresh_token', str(refresh_token), **get_cookie_settings())
+    response.set_cookie(
+        'refresh_token', str(refresh_token), **get_cookie_settings()
+    )
 
 
 def delete_auth_cookies(response):
@@ -45,3 +49,15 @@ def blacklist_refresh_token(raw_refresh_token):
         RefreshToken(raw_refresh_token).blacklist()
     except TokenError:
         pass
+
+
+def get_login_data(user):
+    """Return the response body for a successful login."""
+    return {
+        'detail': 'Login successfully!',
+        'user': {
+            'id': user.id,
+            'username': user.username,
+            'email': user.email,
+        },
+    }

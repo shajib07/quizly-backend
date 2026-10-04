@@ -158,7 +158,6 @@ SIMPLE_JWT = {
 }
 
 
-
 # Quiz generation - Whisper transcribes the audio, Gemini writes the quiz
 
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
@@ -168,6 +167,7 @@ GEMINI_MODELS = os.getenv(
 ).split(',')
 
 WHISPER_MODEL = os.getenv('WHISPER_MODEL', 'base')
+
 
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration

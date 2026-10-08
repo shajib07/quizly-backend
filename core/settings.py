@@ -167,13 +167,3 @@ GEMINI_MODELS = os.getenv(
 ).split(',')
 
 WHISPER_MODEL = os.getenv('WHISPER_MODEL', 'base')
-
-
-# Email
-# https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
-
-MAILERS = {
-    'default': {
-        'BACKEND': 'django.core.mail.backends.console.EmailBackend',
-    },
-}

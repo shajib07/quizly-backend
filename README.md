@@ -8,6 +8,17 @@ This repository contains the REST API built with Django and Django REST
 Framework. The matching frontend is available here:
 https://github.com/Developer-Akademie-Backendkurs/project.Quizly
 
+## Table of contents
+
+- [Features](#features)
+- [Requirements](#requirements)
+- [Install FFmpeg](#install-ffmpeg)
+- [Installation](#installation)
+- [Using the frontend](#using-the-frontend)
+- [API endpoints](#api-endpoints)
+- [Notes on quiz generation](#notes-on-quiz-generation)
+- [Project structure](#project-structure)
+
 ## Features
 
 - Registration, login, logout and token refresh
@@ -22,7 +33,7 @@ https://github.com/Developer-Akademie-Backendkurs/project.Quizly
 - **FFmpeg must be installed globally.** Whisper needs it to read audio files.
 - A free Gemini API key from https://ai.google.dev/
 
-### Install FFmpeg
+## Install FFmpeg
 
 macOS:
 
@@ -42,39 +53,77 @@ Linux (Debian/Ubuntu):
 sudo apt install ffmpeg
 ```
 
-Check the installation with `ffmpeg -version`.
+Check the installation on any system:
+
+```bash
+ffmpeg -version
+```
 
 ## Installation
 
-1. Clone the repository and open the folder:
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/shajib07/quizly-backend.git
+```
+
+Open the project folder:
+
+```bash
 cd quizly-backend
 ```
 
-2. Create and activate a virtual environment:
+### 2. Create a virtual environment
+
+macOS / Linux:
 
 ```bash
 python3 -m venv env
+```
+
+Windows:
+
+```bash
+python -m venv env
+```
+
+### 3. Activate the virtual environment
+
+macOS / Linux:
+
+```bash
 source env/bin/activate
 ```
 
-On Windows use `env\Scripts\activate`.
+Windows:
 
-3. Install the dependencies. Whisper installs PyTorch, so this takes a while:
+```bash
+env\Scripts\activate
+```
+
+### 4. Install the dependencies
+
+Whisper installs PyTorch, so this takes a while.
 
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Create your `.env` file from the template:
+### 5. Create your `.env` file
+
+macOS / Linux:
 
 ```bash
 cp .env.template .env
 ```
 
-5. Fill in the values in `.env`:
+Windows:
+
+```bash
+copy .env.template .env
+```
+
+### 6. Fill in the values in `.env`
 
 | Variable | Description |
 |---|---|
@@ -86,20 +135,25 @@ cp .env.template .env
 | `GEMINI_MODELS` | Gemini models to try, in this order |
 | `WHISPER_MODEL` | Whisper model size, for example `tiny`, `base` or `small` |
 
-You can create a secret key with:
+You can create a secret key with this command:
 
 ```bash
 python -c "from django.core.management.utils import get_random_secret_key as key; print(key())"
 ```
 
-6. Create the database and an admin user:
+### 7. Create the database
 
 ```bash
 python manage.py migrate
+```
+
+### 8. Create an admin user
+
+```bash
 python manage.py createsuperuser
 ```
 
-7. Start the server:
+### 9. Start the server
 
 ```bash
 python manage.py runserver
@@ -141,8 +195,25 @@ quizzes.
 - If the first Gemini model is unavailable, the next one from
   `GEMINI_MODELS` is used.
 - yt-dlp recommends a JavaScript runtime for YouTube downloads. If downloads
-  fail, install Deno (`brew install deno`) and update yt-dlp
-  (`pip install -U yt-dlp`).
+  fail, install Deno and update yt-dlp.
+
+Install Deno on macOS:
+
+```bash
+brew install deno
+```
+
+Install Deno on Windows:
+
+```bash
+winget install --id DenoLand.Deno
+```
+
+Update yt-dlp:
+
+```bash
+pip install -U yt-dlp
+```
 
 ## Project structure
 
